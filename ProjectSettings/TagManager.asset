@@ -9,6 +9,8 @@ TagManager:
   - Green Truck
   - Blue Truck
   - Building
+  - Money
+  - Delivery
   layers:
   - Default
   - TransparentFX

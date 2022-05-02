@@ -1,0 +1,4 @@
+repository "Wisteria-Lane-Frigo-Edition@JustRomeooo@cloud"
+  path "/"
+    br "/main"
+    co "/main"

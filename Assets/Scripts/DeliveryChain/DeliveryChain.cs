@@ -15,6 +15,9 @@ public class DeliveryChain : MonoBehaviour
     private int transportCapacityOfCars;
     private int transportCapacityOfTruck;
 
+    private int maxCapacityOfCar;
+    private int maxCapacityOfTruck;
+
     public Text nbCarText;
     public Text nbTruckText;
     public Text deliveryCapacityText;
@@ -31,6 +34,9 @@ public class DeliveryChain : MonoBehaviour
 
         transportCapacityOfCars = 1;
         transportCapacityOfTruck = 3;
+
+        maxCapacityOfCar = 3;
+        maxCapacityOfTruck = 7;
 
         deliveryCapacity = nbCar * transportCapacityOfCars + nbTruck * transportCapacityOfTruck;
 
@@ -85,5 +91,27 @@ public class DeliveryChain : MonoBehaviour
     public int getMaxNbOfTruck()
     {
         return (maxNbOfTruck);
+    }
+
+    public int getMaxCapacityOfCar()
+    {
+        return (maxCapacityOfCar);
+    }
+
+    public int getMaxCapacityOfTruck()
+    {
+        return (maxCapacityOfTruck);
+    }
+
+    public void increaseCarCapacity()
+    {
+        transportCapacityOfCars += 1;
+        calculateDeliveryCapacity();
+    }
+
+    public void increaseTruckCapacity()
+    {
+        transportCapacityOfTruck += 2;
+        calculateDeliveryCapacity();
     }
 }

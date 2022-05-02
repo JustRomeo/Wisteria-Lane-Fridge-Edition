@@ -28,7 +28,7 @@ public class ProductionManagement : MonoBehaviour
     public GameObject warehouse;
 
     private float time;
-    // Start is called before the first frame update
+
     void Start()
     {
         nextFridgePerHour = fridgeProductionPerHour;

@@ -7,14 +7,23 @@ public class Truck_Spawner : MonoBehaviour {
     public Material[] teams;
     public GameObject prefab;
 
-    void Start() {}
+    private DeliveryChain _delivery;
+
+    void Start() {
+        _delivery = GameObject.FindGameObjectWithTag("Delivery").GetComponent<DeliveryChain>();
+    }
     void Update() {
         for (int i = 0; i < teams.Length; i ++) {
             GameObject[] trucklist = GameObject.FindGameObjectsWithTag(teams[i].name + " Truck");
 
-            if (trucklist.Length < Team[i])
-                create_truck(i, teams[i].name + " Truck");
-            else if (trucklist.Length > Team[i])
+            // if (trucklist.Length < Team[i])
+            //     create_truck(i, teams[i].name + " Truck");
+            // else if (trucklist.Length > Team[i])
+            //     Destroy(trucklist[0]);
+
+            if (trucklist.Length < _delivery.getMaxNbOfTruck())
+                create_truck(i, "Red Truck");
+            else if (trucklist.Length > _delivery.getMaxNbOfTruck())
                 Destroy(trucklist[0]);
         }
     }

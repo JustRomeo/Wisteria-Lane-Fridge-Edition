@@ -56,7 +56,7 @@ public class WarehouseNB : MonoBehaviour
             warehousePlaceText.text = nbFridgeInWareHouse.Count.ToString() + "/" + nbMaxPlace.ToString();
             return (listToReturn);
         }
-        else if (nbFridgeToRemove > nbFridgeInWareHouse.Count) {
+        else if (nbFridgeToRemove >= nbFridgeInWareHouse.Count) {
             for (int i = 0; i < nbFridgeInWareHouse.Count; i++) {
                 listToReturn.Add(nbFridgeInWareHouse[0]);
                 fridgeInWarehouseList.GetComponent<WarehouseFridgeList>().removeFridge();
@@ -76,7 +76,7 @@ public class WarehouseNB : MonoBehaviour
                 listToReturn.Add(nbFridgeInWareHouse[0]);
             return (listToReturn);
         }
-        else if (nbFridgeToRemove > nbFridgeInWareHouse.Count) {
+        else if (nbFridgeToRemove >= nbFridgeInWareHouse.Count) {
             for (int i = 0; i < nbFridgeInWareHouse.Count; i++)
                 listToReturn.Add(nbFridgeInWareHouse[0]);
             return (listToReturn);

@@ -25,11 +25,11 @@ public class NewProductionLineUpgrade : MonoBehaviour
     {
 
         if (money.GetComponent<MoneyMaking>().getMoney() > costOfUpgrade && stateOfUpgrade < maxUpgradeOfPL) {
+            money.GetComponent<MoneyMaking>().pay(costOfUpgrade);
             stateOfUpgrade += 1;
             costOfUpgrade *= 2;
             stateOfUpgradeText.text = "Actual number of production line = " + stateOfUpgrade.ToString();
             costOfUpgradeText.text = "Cost of upgrade = " + costOfUpgrade.ToString() + "$";
-            money.GetComponent<MoneyMaking>().pay(costOfUpgrade);
         }
     }
 }

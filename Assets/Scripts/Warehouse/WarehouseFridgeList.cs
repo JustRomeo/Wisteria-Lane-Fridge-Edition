@@ -31,6 +31,7 @@ public class WarehouseFridgeList : MonoBehaviour
         GameObject newFridge = Instantiate(fridgePrefabs, new Vector3(-240, lastPosition.y - 75, 0), Quaternion.identity);
         newFridge.transform.SetParent(this.transform, false);
         fridgeList.Add(newFridge);
+        newFridge.GetComponent<FridgeInWarehouse>().setFridgePrice(price);
     }
 
     public void removeFridge()
@@ -47,7 +48,7 @@ public class WarehouseFridgeList : MonoBehaviour
             oldSize = fridgeListRect.sizeDelta;
             fridgeListRect.sizeDelta = new Vector2(oldSize.x, oldSize.y - 75);
         }
-        else {
+        else if (fridgeList.Count == 1) {
             Destroy(fridgeList[0]);
             fridgeList.RemoveAt(0);
             oldSize = fridgeListRect.sizeDelta;
