@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class BuyBuilding : MonoBehaviour {
 
+    public GameObject prefab;
     public Material _teamcolor;
 
     private Vector3 mousePos;
@@ -31,7 +32,7 @@ public class BuyBuilding : MonoBehaviour {
 
         isKeepRightClickPressed();
         if (Input.GetMouseButtonDown(0)) // Left Click
-            buybuilding();
+            isBuildingBuyable();
         else if (isRightClickPress)      // Right Click
             viewMoving();
         // if (Input.GetMouseButtonDown(2)) {
@@ -49,7 +50,19 @@ public class BuyBuilding : MonoBehaviour {
             isRightClickPress = true;
     }
 
-    void buybuilding() {
+    void buyBuilding(GameObject choosen) {
+        choosen.GetComponent<Renderer>().material = _teamcolor;
+        _money.pay(buildingprice);
+        buildingprice += Random.Range(buildingprice, buildingprice * 3);
+
+        GameObject trck_spwnr = Instantiate(prefab, choosen.transform.position, Quaternion.identity);
+        Truck_Spawner script = trck_spwnr.GetComponent<Truck_Spawner>();
+
+        script.Team[0] = 0;
+        script.teams[0] = _teamcolor;
+    }
+
+    void isBuildingBuyable() {
         GameObject choosen = null;
         float lastdistance = 99999;
         Vector3 _cam = _camera.transform.position;
@@ -66,13 +79,10 @@ public class BuyBuilding : MonoBehaviour {
                 choosen = _buildings[i];
             }
         } if (choosen) {
-            if (_money.getMoney() >= buildingprice) {
-                choosen.GetComponent<Renderer>().material = _teamcolor;
-                _money.pay(buildingprice);
-                buildingprice += Random.Range(buildingprice, buildingprice * 3);
-            } else {
+            if (_money.getMoney() >= buildingprice)
+                buyBuilding(choosen);
+            else
                 print("Not enough money, need " + (buildingprice - _money.getMoney()) + "$ more.");
-            }
         }
     }
     void viewMoving() {

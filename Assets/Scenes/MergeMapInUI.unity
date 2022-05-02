@@ -17578,6 +17578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c07bf4379e3a5348b1fda10e2687d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 6261045498435980800, guid: 94708b0b0f961084a985d2de3369f281, type: 3}
   _teamcolor: {fileID: 2100000, guid: fb0787ce3b1b346439c84ce6e37c2c18, type: 2}
 --- !u!1 &1437318972
 GameObject:
@@ -20250,7 +20251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1739568071
 Transform:
   m_ObjectHideFlags: 0

@@ -14,16 +14,17 @@ public class Truck_Spawner : MonoBehaviour {
     }
     void Update() {
         for (int i = 0; i < teams.Length; i ++) {
-            GameObject[] trucklist = GameObject.FindGameObjectsWithTag(teams[i].name + " Truck");
+            GameObject[] trucklist = GameObject.FindGameObjectsWithTag("Red Truck");
+            // GameObject[] trucklist = GameObject.FindGameObjectsWithTag(teams[i].name + " Truck");
 
             // if (trucklist.Length < Team[i])
             //     create_truck(i, teams[i].name + " Truck");
             // else if (trucklist.Length > Team[i])
             //     Destroy(trucklist[0]);
 
-            if (trucklist.Length < _delivery.getMaxNbOfTruck())
+            if (trucklist.Length < _delivery.nbTruck)
                 create_truck(i, "Red Truck");
-            else if (trucklist.Length > _delivery.getMaxNbOfTruck())
+            else if (trucklist.Length > _delivery.nbTruck)
                 Destroy(trucklist[0]);
         }
     }
