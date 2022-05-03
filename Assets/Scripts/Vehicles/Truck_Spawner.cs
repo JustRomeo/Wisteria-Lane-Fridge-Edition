@@ -40,7 +40,8 @@ public class Truck_Spawner : MonoBehaviour {
         truck.GetComponent<Renderer>().material = teams[team_row];
         truck.transform.position = new Vector3(truck.transform.position.x, 0, truck.transform.position.z);
 
-        for (int i = 0; i < 5; i ++)
-            _move.destinations.Add(chckpnts[Random.Range(0, chckpnts.Length)].transform);
+        _move.randomPathGeneration(9);
+        // for (int i = 0; i < 5; i ++)
+        //     _move.destinations.Add(chckpnts[Random.Range(0, chckpnts.Length)].transform);
     }
 }

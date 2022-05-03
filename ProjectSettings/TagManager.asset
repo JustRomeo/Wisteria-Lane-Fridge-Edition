@@ -11,6 +11,7 @@ TagManager:
   - Building
   - Money
   - Delivery
+  - TextScore
   layers:
   - Default
   - TransparentFX

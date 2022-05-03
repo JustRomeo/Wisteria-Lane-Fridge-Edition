@@ -8,8 +8,9 @@ public class MoneyMaking : MonoBehaviour
 {
 
     public int money;
-    public int moneyPerHour;
     public Text moneyText;
+    public int moneyPerHour;
+    public int enterpriseValue;
 
     private int nextMoneyPerHour;
     public Text moneyPerHourText;
@@ -33,6 +34,10 @@ public class MoneyMaking : MonoBehaviour
         moneyText.text = money.ToString() + "$";
         moneyPerHourText.text = moneyPerHour.ToString() + "$/h";
         time = 0;
+
+        enterpriseValue = money;
+        PlayerPrefs.SetInt("money", money);
+        PlayerPrefs.SetInt("enterpriseValue", enterpriseValue);
     }
 
     // Update is called once per frame
@@ -51,7 +56,10 @@ public class MoneyMaking : MonoBehaviour
             time = 0;
         }
         money += moneyEarned;
+        enterpriseValue += moneyEarned;
+        PlayerPrefs.SetInt("money", money);
         moneyText.text = money.ToString() + "$";
+        PlayerPrefs.SetInt("enterpriseValue", enterpriseValue);
     }
 
     public void increaseMoneyEarning(int newMoneyPerHour)
@@ -74,9 +82,12 @@ public class MoneyMaking : MonoBehaviour
         return (money);
     }
 
+    public int getEnterpriseValue() {return enterpriseValue;}
+
     public void pay(int valueToPay)
     {
         money -= valueToPay;
+        PlayerPrefs.SetInt("money", money);
         moneyText.text = money.ToString() + "$";
     }
 
