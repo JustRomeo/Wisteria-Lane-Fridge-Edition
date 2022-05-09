@@ -27,10 +27,23 @@ public class ProductionManagement : MonoBehaviour
     public GameObject deliveryChain;
     public GameObject warehouse;
 
+    private float moneyMakingTime;
+
+    private float adTimeBoost;
+    private float speedTimeBoost;
+    private bool isAdCampainActive;
+    public GameObject adPrefab;
+
+
+    private float adTime;
+
     private float time;
+
+    public GameObject Canvas;
 
     void Start()
     {
+        moneyMakingTime = 5;
         nextFridgePerHour = fridgeProductionPerHour;
         // productionManagement = GetComponent<Slider>();
         productionManagement.onValueChanged.AddListener(delegate {productionManagementValueChange ();});
@@ -40,6 +53,7 @@ public class ProductionManagement : MonoBehaviour
         nextFridgePrice = fridgePrice;
         nextFridgePerHour = fridgeProductionPerHour;
         fridgeProductionPerHourText.text  = fridgeProductionPerHour.ToString() + "/h";
+        adTime = 0;
         calculateMoneyEarning();
     }
 
@@ -47,8 +61,19 @@ public class ProductionManagement : MonoBehaviour
     void Update()
     {
         calculateMoneyEarning();
-        time += Time.deltaTime;
-        if (time > 5) {
+        float deltaTime = Time.deltaTime;
+        time += deltaTime;
+        adTime += deltaTime;
+        if (isAdCampainActive) {
+            adTime += deltaTime;
+            if (adTime > adTimeBoost) {
+                adTimeBoost = 0;
+                adTime = 0;
+                isAdCampainActive = false;
+                moneyMakingTime = 5;
+            }
+        }
+        if (time > moneyMakingTime) {
             time = 0;
             deliveryCapacity = deliveryChain.GetComponent<DeliveryChain>().getDeliveryCapacity();
             List<int> fridgeToSend = createListOfFridgeToSend();
@@ -124,5 +149,22 @@ public class ProductionManagement : MonoBehaviour
     public void allowHighCost()
     {
         highCostFridge = true;
+    }
+
+    public void createAdd(float timeBoost, float speedBoost, string adName, string adType)
+    {
+        adTime = 0;
+        isAdCampainActive = true;
+        adTimeBoost = timeBoost;
+        moneyMakingTime = moneyMakingTime * speedBoost;
+        createAdInfoCanvas(adName, adType);
+    }
+
+    void createAdInfoCanvas(string adName, string adType)
+    {
+        GameObject newAd = Instantiate(adPrefab, new Vector3(610, 310, 0), Quaternion.identity);
+        newAd.transform.SetParent(Canvas.transform, false);
+        newAd.GetComponent<AdToaster>().setRemainingTime(adTimeBoost);
+        newAd.GetComponent<AdToaster>().setAdTitle(adName, adType);
     }
 }

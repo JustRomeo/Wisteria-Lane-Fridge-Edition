@@ -10,6 +10,7 @@ public class CreateAdvertisement : MonoBehaviour
     public TMP_InputField adName;
 
     private float adBudget;
+    private string adBoostType;
     public Slider adBudgetSlider;
     public TMP_Text adBudgetText;
 
@@ -22,14 +23,21 @@ public class CreateAdvertisement : MonoBehaviour
     public GameObject Button2;
     public GameObject Button3;
 
+    public GameObject MoneyBoostType;
+    public GameObject SpeedBoostType;
+
     public GameObject money;
+    public GameObject productionManagement;
 
     void Start()
     {
         adBudget = 250;
         campainDuration = 1.5F;
-        EventSystem.current.SetSelectedGameObject(Button1);
         Button1.GetComponent<Image>().color = Color.red;
+        MoneyBoostType.GetComponent<Image>().color = Color.red;
+        EventSystem.current.SetSelectedGameObject(Button1);
+        EventSystem.current.SetSelectedGameObject(MoneyBoostType);
+        adBoostType = "money";
         updateTotalPrice();
     }
 
@@ -67,16 +75,42 @@ public class CreateAdvertisement : MonoBehaviour
         adCampainTotalPriceText.text = (adBudget * campainDuration).ToString();
     }
 
+    public void setAdBoostType(string boostType)
+    {
+        if (boostType == "money") {
+            adBoostType = "money";
+            SpeedBoostType.GetComponent<Image>().color = Color.white;
+            MoneyBoostType.GetComponent<Image>().color = Color.red;
+        }
+        if (boostType == "speed") {
+            adBoostType = "speed";
+            MoneyBoostType.GetComponent<Image>().color = Color.white;
+            SpeedBoostType.GetComponent<Image>().color = Color.red;
+        }
+    }
+
     public void createAdCampain()
     {
         if (money.GetComponent<MoneyMaking>().getMoney() >= adCampainTotalPrice) {
-            money.GetComponent<MoneyMaking>().pay(adCampainTotalPrice);
-            if (campainDuration == 1.5)
-                money.GetComponent<MoneyMaking>().createAdd(50, 2, adName.text);
-            if (campainDuration == 2)
-                money.GetComponent<MoneyMaking>().createAdd(70, 2, adName.text);
-            if (campainDuration == 4)
-                money.GetComponent<MoneyMaking>().createAdd(150, 2, adName.text);
+            if (adBoostType == "money") {
+                money.GetComponent<MoneyMaking>().pay(adCampainTotalPrice);
+                if (campainDuration == 1.5)
+                    money.GetComponent<MoneyMaking>().createAdd(50, 2, adName.text, adBoostType);
+                if (campainDuration == 2)
+                    money.GetComponent<MoneyMaking>().createAdd(75, 2, adName.text, adBoostType);
+                if (campainDuration == 4)
+                    money.GetComponent<MoneyMaking>().createAdd(150, 2, adName.text, adBoostType);
+            }
+            if (adBoostType == "speed") {
+                money.GetComponent<MoneyMaking>().pay(adCampainTotalPrice);
+                if (campainDuration == 1.5)
+                    productionManagement.GetComponent<ProductionManagement>().createAdd(50, (float)0.5, adName.text, adBoostType);
+                if (campainDuration == 2)
+                    productionManagement.GetComponent<ProductionManagement>().createAdd(75, (float)0.5, adName.text, adBoostType);
+                if (campainDuration == 4)
+                    productionManagement.GetComponent<ProductionManagement>().createAdd(150, (float)0.5, adName.text, adBoostType);
+
+            }
         }
     }
 }

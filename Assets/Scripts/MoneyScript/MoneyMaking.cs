@@ -91,20 +91,20 @@ public class MoneyMaking : MonoBehaviour
         moneyText.text = money.ToString() + "$";
     }
 
-    public void createAdd(float timeBoost, float moneyBoost, string adName)
+    public void createAdd(float timeBoost, float moneyBoost, string adName, string adType)
     {
         time = 0;
         isAdCampainActive = true;
         adMoneyBoost = moneyBoost;
         adTimeBoost = timeBoost;
-        createAdInfoCanvas(adName);
+        createAdInfoCanvas(adName, adType);
     }
 
-    void createAdInfoCanvas(string adName)
+    void createAdInfoCanvas(string adName, string adType)
     {
         GameObject newAd = Instantiate(adPrefab, new Vector3(610, 310, 0), Quaternion.identity);
         newAd.transform.SetParent(Canvas.transform, false);
         newAd.GetComponent<AdToaster>().setRemainingTime(adTimeBoost);
-        newAd.GetComponent<AdToaster>().setAdName(adName);
+        newAd.GetComponent<AdToaster>().setAdTitle(adName, adType);
     }
 }

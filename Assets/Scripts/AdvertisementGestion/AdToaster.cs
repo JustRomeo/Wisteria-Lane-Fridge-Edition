@@ -35,8 +35,11 @@ public class AdToaster : MonoBehaviour
         remainingTime = remaining;
     }
 
-    public void setAdName(string adName)
+    public void setAdTitle(string adName, string adType)
     {
-        adText.text = "campain " + adName + " launched";
+        if (adType == "money")
+            adText.text = "campain \"" + adName + "\" launched\nBoosting money received";
+        if (adType == "speed")
+            adText.text = "campain \"" + adName + "\" launched\nBoosting speed";
     }
 }

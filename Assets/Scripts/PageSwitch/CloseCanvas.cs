@@ -5,6 +5,8 @@ using UnityEngine;
 public class CloseCanvas : MonoBehaviour
 {
     public GameObject mainCanvas;
+
+    public GameObject canvasInfo;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,7 @@ public class CloseCanvas : MonoBehaviour
     // Update is called once per frame
     public void closeCanvas()
     {
+        canvasInfo.GetComponent<ActiveCanvas>().closeCanvas();
         mainCanvas.transform.localPosition = new Vector3(1500, 0, 0);
     }
 }
