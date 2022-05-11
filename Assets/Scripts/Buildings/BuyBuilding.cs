@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class BuyBuilding : MonoBehaviour {
 
+    public GameObject Canvas;
     public GameObject prefab;
     public Material[] _teamcolor;
 
@@ -13,21 +14,28 @@ public class BuyBuilding : MonoBehaviour {
     private GameObject _camera;
     private GameObject[] _buildings;
     private Vector3 oldmouseposition;
+    private ActiveCanvas canvascript;
     private bool isRightClickPress = false;
     private Vector3 camPos = new Vector3(0, 0, 0);
     private Vector3 startcampos = new Vector3(475, 500, 275);
 
     void Start() {
         buildingprice = 5000;
+        canvascript = Canvas.GetComponent<ActiveCanvas>();
         _camera = GameObject.FindGameObjectWithTag("MainCamera");
         _buildings = GameObject.FindGameObjectsWithTag("Building");
         _money = GameObject.FindGameObjectWithTag("Money").GetComponent<MoneyMaking>();
 
         oldmouseposition = Input.mousePosition;
         startcampos = _camera.transform.position;
+
         spawnbuildings();
     }
     void Update() {
+        // Check if canvas is open
+        if (canvascript.getActiveCanvas() || Input.mousePosition.y < 150)
+            return;
+
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
             mousePos = Input.mousePosition;
 
@@ -36,9 +44,8 @@ public class BuyBuilding : MonoBehaviour {
             isBuildingBuyable();
         else if (isRightClickPress)
             viewMoving();
-        // if (Input.GetMouseButtonDown(2)) {
+        // if (Input.GetMouseButtonDown(2))
         //     print("Middle Mouse Button");
-        // }
 
         oldmouseposition = Input.mousePosition;
     }
@@ -58,7 +65,7 @@ public class BuyBuilding : MonoBehaviour {
             buildingprice += Random.Range(_price, _price * 3);
 
         GameObject trck_spwnr = Instantiate(prefab, choosen.transform.position, Quaternion.identity);
-        Truck_Spawner script = trck_spwnr.GetComponent<Truck_Spawner>();
+        VehiclesSpawner script = trck_spwnr.GetComponent<VehiclesSpawner>();
 
         script.Team[0] = 0;
         script.teams[0] = _teamcolor[0];
@@ -117,11 +124,3 @@ public class BuyBuilding : MonoBehaviour {
         }
     }
 }
-
-// Chaque team possede un nombres de buildings, leur nombre et repertorié dans une liste
-// teambuildings = [[]]
-
-// 1: [1, 5]
-// 2: [2, 6]
-// 3: [3, 7]
-// 4: [4, 8]

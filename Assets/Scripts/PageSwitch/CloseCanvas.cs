@@ -16,6 +16,6 @@ public class CloseCanvas : MonoBehaviour
     public void closeCanvas()
     {
         canvasInfo.GetComponent<ActiveCanvas>().closeCanvas();
-        mainCanvas.transform.localPosition = new Vector3(1500, 0, 0);
+        mainCanvas.transform.localPosition = new Vector3(2000, 0, 0);
     }
 }

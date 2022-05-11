@@ -30,16 +30,14 @@ public class AdToaster : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void setRemainingTime(float remaining)
     {
         remainingTime = remaining;
     }
 
-    public void setAdTitle(string adName, string adType)
+    public void setAdTitle(string adTitle)
     {
-        if (adType == "money")
-            adText.text = "campain \"" + adName + "\" launched\nBoosting money received";
-        if (adType == "speed")
-            adText.text = "campain \"" + adName + "\" launched\nBoosting speed";
+        adText.text = adTitle;
     }
 }

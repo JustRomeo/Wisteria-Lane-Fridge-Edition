@@ -21,7 +21,7 @@ public class EndMenu : MonoBehaviour {
         else
             print("Text: Null");
 
-        scoretext.SetText(newstring);
-        scoretext.text = newstring;
+        // scoretext.SetText(newstring);
+        // scoretext.text = newstring;
     }
 }

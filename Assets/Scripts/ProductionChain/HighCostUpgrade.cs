@@ -7,19 +7,20 @@ using UnityEngine.UI;
 public class HighCostUpgrade : MonoBehaviour
 {
     public int stateOfUpgrade;
-    public int maxUpgradeOfPL;
+    public int maxUpgrade;
     public int costOfUpgrade;
     public GameObject money;
     public GameObject productionLine;
+    public GameObject upgradeButton;
 
     public Text stateOfUpgradeText;
-    public Text maxUpgradeOfPLText;
+    public Text maxUpgradeText;
     public Text costOfUpgradeText;
     // Start is called before the first frame update
     void Start()
     {
         stateOfUpgradeText.text = "Ability to manufacture high cost products = " + stateOfUpgrade.ToString();
-        maxUpgradeOfPLText.text = "Max number of upgrade = " + maxUpgradeOfPL.ToString();
+        maxUpgradeText.text = "Max number of upgrade = " + maxUpgrade.ToString();
         costOfUpgradeText.text = "Cost of upgrade = " + costOfUpgrade.ToString() + "$";
     }
 
@@ -31,13 +32,18 @@ public class HighCostUpgrade : MonoBehaviour
     public void upgrade()
     {
         Debug.Log(money.GetComponent<MoneyMaking>().getMoney());
-        if (money.GetComponent<MoneyMaking>().getMoney() > costOfUpgrade && stateOfUpgrade < maxUpgradeOfPL) {
+        if (money.GetComponent<MoneyMaking>().getMoney() > costOfUpgrade && stateOfUpgrade < maxUpgrade) {
             money.GetComponent<MoneyMaking>().pay(costOfUpgrade);
             productionLine.GetComponent<ProductionManagement>().allowHighCost();
             stateOfUpgrade += 1;
             costOfUpgrade *= 2;
             stateOfUpgradeText.text = "Ability to manufacture low cost products = " + stateOfUpgrade.ToString();
-            costOfUpgradeText.text = "Cost of upgrade = " + costOfUpgrade.ToString() + "$";
+            if (stateOfUpgrade == maxUpgrade) {
+                costOfUpgradeText.text = "";
+                upgradeButton.SetActive(false);
+            }
+            else
+                costOfUpgradeText.text = "Cost of upgrade = " + costOfUpgrade.ToString() + "$";
         }
     }
 }

@@ -12,6 +12,9 @@ TagManager:
   - Money
   - Delivery
   - TextScore
+  - Red Car
+  - RepairCanvas
+  - Canvas
   layers:
   - Default
   - TransparentFX

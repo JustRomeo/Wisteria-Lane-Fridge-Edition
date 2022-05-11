@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MergeMapInUI/MergeMapInUI.unity
+    guid: 72868b674c07d5740aca506454040410
+  - enabled: 1
+    path: Assets/Scenes/Menu/EndScreen.unity
+    guid: 767c64e9795ce6f4193337427764b510
+  - enabled: 1
+    path: Assets/Scenes/Menu/Settings.unity
+    guid: a38908c03632f3e4ca4a45b8377f01fb
   m_configObjects: {}

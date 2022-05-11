@@ -95,20 +95,20 @@ public class CreateAdvertisement : MonoBehaviour
             if (adBoostType == "money") {
                 money.GetComponent<MoneyMaking>().pay(adCampainTotalPrice);
                 if (campainDuration == 1.5)
-                    money.GetComponent<MoneyMaking>().createAdd(50, 2, adName.text, adBoostType);
+                    money.GetComponent<MoneyMaking>().createAdd(50, 2, adName.text);
                 if (campainDuration == 2)
-                    money.GetComponent<MoneyMaking>().createAdd(75, 2, adName.text, adBoostType);
+                    money.GetComponent<MoneyMaking>().createAdd(75, 2, adName.text);
                 if (campainDuration == 4)
-                    money.GetComponent<MoneyMaking>().createAdd(150, 2, adName.text, adBoostType);
+                    money.GetComponent<MoneyMaking>().createAdd(150, 2, adName.text);
             }
             if (adBoostType == "speed") {
                 money.GetComponent<MoneyMaking>().pay(adCampainTotalPrice);
                 if (campainDuration == 1.5)
-                    productionManagement.GetComponent<ProductionManagement>().createAdd(50, (float)0.5, adName.text, adBoostType);
+                    productionManagement.GetComponent<ProductionManagement>().createAdd(50, (float)0.5, adName.text);
                 if (campainDuration == 2)
-                    productionManagement.GetComponent<ProductionManagement>().createAdd(75, (float)0.5, adName.text, adBoostType);
+                    productionManagement.GetComponent<ProductionManagement>().createAdd(75, (float)0.5, adName.text);
                 if (campainDuration == 4)
-                    productionManagement.GetComponent<ProductionManagement>().createAdd(150, (float)0.5, adName.text, adBoostType);
+                    productionManagement.GetComponent<ProductionManagement>().createAdd(150, (float)0.5, adName.text);
 
             }
         }

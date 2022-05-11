@@ -18,6 +18,8 @@ public class ProductionManagement : MonoBehaviour
 
     private int nextFridgePrice;
     private int nextFridgePerHour;
+    public Text nextFridgePriceText;
+    public Text nextFridgePerHourText;
 
 
     public bool lowCostFridge = false;
@@ -112,6 +114,8 @@ public class ProductionManagement : MonoBehaviour
         sliderValue = productionManagement.value;
         nextFridgePerHour = (int)((5 / sliderValue) * 5);
         nextFridgePrice = (int)sliderValue * 50;
+        nextFridgePriceText.text = nextFridgePrice.ToString() + "$";
+        nextFridgePerHourText.text = nextFridgePerHour.ToString() + "/h";
     }
 
     void calculateMoneyEarning()
@@ -151,20 +155,23 @@ public class ProductionManagement : MonoBehaviour
         highCostFridge = true;
     }
 
-    public void createAdd(float timeBoost, float speedBoost, string adName, string adType)
+    public void createAdd(float timeBoost, float speedBoost, string adName)
     {
         adTime = 0;
         isAdCampainActive = true;
         adTimeBoost = timeBoost;
         moneyMakingTime = moneyMakingTime * speedBoost;
-        createAdInfoCanvas(adName, adType);
+        createAdInfoCanvas(adName);
     }
 
-    void createAdInfoCanvas(string adName, string adType)
+    void createAdInfoCanvas(string adName)
     {
+        string adTitle = "campain \"" + adName + "\" launched\nBoosting speed";
+
         GameObject newAd = Instantiate(adPrefab, new Vector3(610, 310, 0), Quaternion.identity);
+
         newAd.transform.SetParent(Canvas.transform, false);
         newAd.GetComponent<AdToaster>().setRemainingTime(adTimeBoost);
-        newAd.GetComponent<AdToaster>().setAdTitle(adName, adType);
+        newAd.GetComponent<AdToaster>().setAdTitle(adTitle);
     }
 }

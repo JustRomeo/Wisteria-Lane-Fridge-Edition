@@ -18,7 +18,7 @@ public class MoveCanvas : MonoBehaviour
         mainCanvas.transform.localPosition = new Vector3(0, 0, 0);
         canvasInfo.GetComponent<ActiveCanvas>().setCanvasActive(mainCanvas);
         for (int i = 0; i < otherPage.Count; i++) {
-            otherPage[i].transform.localPosition = new Vector3(1500, 0, 0);
+            otherPage[i].transform.localPosition = new Vector3(2000, 0, 0);
         }
     }
 }

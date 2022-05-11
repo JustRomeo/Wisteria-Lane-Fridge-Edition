@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6261045498435980800}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 506, y: 0, z: -123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 280, y: 0, z: 255.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8636c7abddbc63e4c80e696788508afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 02000000
+  Team: 02000000020000000200000002000000
   teams:
   - {fileID: 2100000, guid: fb0787ce3b1b346439c84ce6e37c2c18, type: 2}
-  prefab: {fileID: 5788322144636419921, guid: 9597213e407f1c248b324a3e7318f36c, type: 3}
+  - {fileID: 2100000, guid: d9ee8404129ec764daa84074f4d23b07, type: 2}
+  - {fileID: 2100000, guid: 1f5cebe12d7bf30468df3896cd88fee0, type: 2}
+  - {fileID: 2100000, guid: 1b94b77e6944a814e9f36e4b2b8430bf, type: 2}
+  car_prefab: {fileID: 1740222347021670686, guid: 4094c0d21774d274b951d3bfbcf60e7a, type: 3}
+  truck_prefab: {fileID: 5788322144636419921, guid: 9597213e407f1c248b324a3e7318f36c, type: 3}
