@@ -33,11 +33,11 @@ RectTransform:
   m_Father: {fileID: 2504803471828692230}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -40.114, y: -4.9958}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 84.325, y: 19.655}
   m_SizeDelta: {x: 159.15, y: 29}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5000001}
 --- !u!222 &2504803471561425458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: ' Repair vehicle'
+  m_Text: Repair vehicle
 --- !u!1 &2504803471782121151
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,10 +113,10 @@ RectTransform:
   m_Father: {fileID: 2504803471828692230}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -4.1458, y: -17.528}
-  m_SizeDelta: {x: -2.9893, y: 34.3663}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 5, y: -17.528}
+  m_SizeDelta: {x: 255.5, y: 34.3663}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2504803471782121149
 CanvasRenderer:
@@ -159,7 +159,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: ' Repair your vehicle for : 1000$'
+  m_Text: 'Repair your vehicle for : 1000$'
 --- !u!1 &2504803471828692233
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,8 +200,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -192.81, y: -21}
-  m_SizeDelta: {x: 239.3809, y: 79.3106}
+  m_AnchoredPosition: {x: -181.91724, y: -21}
+  m_SizeDelta: {x: 255, y: 79.3106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2504803471828692229
 CanvasRenderer:
@@ -256,7 +256,7 @@ MonoBehaviour:
   money: {fileID: 0}
   deliveryChain: {fileID: 0}
   damageToaster: {fileID: 0}
-  costOfUpgradeText: {fileID: 2504803471782121148}
+  costOfRepairText: {fileID: 2504803471782121148}
 --- !u!1 &2504803472771373241
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,8 +292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 119.69, y: 19.655}
-  m_SizeDelta: {x: 239.38, y: 40}
+  m_AnchoredPosition: {x: 127.5, y: 19.655}
+  m_SizeDelta: {x: 255, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2504803472771373236
 CanvasRenderer:
@@ -444,11 +444,11 @@ RectTransform:
   m_Father: {fileID: 2504803471828692230}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 101.54999, y: -17.528004}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -5, y: -15.200012}
   m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.49999994, y: 0.49999976}
+  m_Pivot: {x: 1, y: 0.49999976}
 --- !u!222 &2504803473420397309
 CanvasRenderer:
   m_ObjectHideFlags: 0

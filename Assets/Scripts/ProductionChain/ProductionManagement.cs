@@ -10,20 +10,28 @@ public class ProductionManagement : MonoBehaviour
     public Text fridgePriceText;
     public Text fridgeProductionPerHourText;
 
-    private int fridgePrice;
+    private List<int> fridgeProductionList;
+    private List<int> fridgePriceList;
+
+    private int fridgePrice = 175;
     private int fridgeProductionPerHour;
     private float sliderValue;
     private int deliveryCapacity;
     private int totalFridgeToSend;
+
+    private int opponentFridgePrice;
+    private int opponentFridgeProduction;
 
     private int nextFridgePrice;
     private int nextFridgePerHour;
     public Text nextFridgePriceText;
     public Text nextFridgePerHourText;
 
-
     public bool lowCostFridge = false;
     public bool highCostFridge = false;
+
+    private int lowCostValue;
+    private int highCostValue;
 
     public GameObject money;
     public GameObject deliveryChain;
@@ -36,28 +44,113 @@ public class ProductionManagement : MonoBehaviour
     private bool isAdCampainActive;
     public GameObject adPrefab;
 
+    private bool isProductionChainDamaged;
+    private float damageMoneyDrop;
+    private float damageTimeDuration;
+    private int damageRepairCost;
+
+    private int maintenancePercent;
+    private float productionChainDamageTime;
 
     private float adTime;
 
     private float time;
 
     public GameObject Canvas;
+    public GameObject ToasterList;
 
     void Start()
     {
         moneyMakingTime = 5;
         nextFridgePerHour = fridgeProductionPerHour;
-        // productionManagement = GetComponent<Slider>();
         productionManagement.onValueChanged.AddListener(delegate {productionManagementValueChange ();});
         sliderValue = productionManagement.value;
-        fridgePrice = 250;
-        fridgeProductionPerHour = 5;
+        fridgePrice = 175;
+        fridgeProductionPerHour = 7;
         nextFridgePrice = fridgePrice;
         nextFridgePerHour = fridgeProductionPerHour;
         fridgeProductionPerHourText.text  = fridgeProductionPerHour.ToString() + "/h";
         adTime = 0;
+        maintenancePercent = 5;
+
+        lowCostValue = 3;
+        highCostValue = 12;
+
+        fridgeProductionList =  new List<int>{25, 17, 13, 10, 7, 5, 3, 2, 1};
+        fridgePriceList = new List<int>{80, 105, 120, 140, 175, 280, 535, 900, 2000};
         calculateMoneyEarning();
+        productionManagementValueChange();
     }
+
+    public bool isProductionDamaged()
+    {
+        return (isProductionChainDamaged);
+    }
+
+    private VehicleDamageStat productionChainDamage()
+    {
+        int damageType = Random.Range(1, 10);
+        VehicleDamageStat damageStat = new VehicleDamageStat();
+
+        if (damageType == 1) {
+            damageMoneyDrop = 0.33F;
+            damageTimeDuration = 90;
+            damageType = 3;
+            damageRepairCost = 5000;
+            damageStat.setData(damageMoneyDrop, damageTimeDuration, damageType, damageRepairCost);
+            return (damageStat);
+        }
+        else {
+            damageType = Random.Range(1, 10);
+            if (damageType <= 6) {
+                damageMoneyDrop = 0.50F;
+                damageTimeDuration = 60;
+                damageType = 2;
+                damageRepairCost = 3000;
+                damageStat.setData(damageMoneyDrop, damageTimeDuration, damageType, damageRepairCost);
+                return (damageStat);
+            }
+            else {
+                damageMoneyDrop = 0.66F;
+                damageTimeDuration = 30;
+                damageType = 1;
+                damageRepairCost = 1500;
+                damageStat.setData(damageMoneyDrop, damageTimeDuration, damageType, damageRepairCost);
+                return (damageStat);
+            }
+        }
+    }
+
+    public void productionSabotage(int damageType)
+    {
+        VehicleDamageStat damageStat = new VehicleDamageStat();
+
+        if (damageType == 3) {
+            damageMoneyDrop = 0.33F;
+            damageTimeDuration = 30;
+            damageType = 3;
+            damageRepairCost = 1500;
+            damageStat.setData(damageMoneyDrop, damageTimeDuration, damageType, damageRepairCost);
+        }
+        if (damageType == 2) {
+            damageMoneyDrop = 0.50F;
+            damageTimeDuration = 60;
+            damageType = 2;
+            damageRepairCost = 3000;
+            damageStat.setData(damageMoneyDrop, damageTimeDuration, damageType, damageRepairCost);
+        }
+        if (damageType == 1) {
+            damageMoneyDrop = 0.66F;
+            damageTimeDuration = 90;
+            damageType = 1;
+            damageRepairCost = 5000;
+            damageStat.setData(damageMoneyDrop, damageTimeDuration, damageType, damageRepairCost);
+        }
+        isProductionChainDamaged = true;
+        money.GetComponent<MoneyMaking>().createProductionDamageToaster(damageStat, gameObject);
+        StartCoroutine(coroutineStopDamage());
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -65,7 +158,7 @@ public class ProductionManagement : MonoBehaviour
         calculateMoneyEarning();
         float deltaTime = Time.deltaTime;
         time += deltaTime;
-        adTime += deltaTime;
+        productionChainDamageTime += deltaTime;
         if (isAdCampainActive) {
             adTime += deltaTime;
             if (adTime > adTimeBoost) {
@@ -89,6 +182,17 @@ public class ProductionManagement : MonoBehaviour
             deliveryChain.GetComponent<DeliveryChain>().recieveDelivery(fridgeToSend);
             updateFridgeProduction();
         }
+        if (productionChainDamageTime > 10)
+        {
+            int randomDamage = Random.Range(1, 10);
+            if (randomDamage > maintenancePercent && isProductionChainDamaged == false) {
+                isProductionChainDamaged = true;
+                VehicleDamageStat damageStat = productionChainDamage();
+                money.GetComponent<MoneyMaking>().createProductionDamageToaster(damageStat, gameObject);
+                StartCoroutine(coroutineStopDamage());
+            }
+            productionChainDamageTime = 0;
+        }
     }
 
     void updateFridgeProduction()
@@ -103,24 +207,29 @@ public class ProductionManagement : MonoBehaviour
 
     public void productionManagementValueChange()
     {
-        if (productionManagement.value < 3 && lowCostFridge == false) {
+        int price = 0;
+        int production = 0;
+        if (productionManagement.value < lowCostValue && lowCostFridge == false) {
             productionManagement.value = 3;
             return;
         }
-        if (productionManagement.value > 12 && highCostFridge == false) {
-            productionManagement.value = 12;
+        if (productionManagement.value > highCostValue && highCostFridge == false) {
+            productionManagement.value = 5;
             return;
         }
         sliderValue = productionManagement.value;
-        nextFridgePerHour = (int)((5 / sliderValue) * 5);
-        nextFridgePrice = (int)sliderValue * 50;
+        price = fridgePriceList[(int)productionManagement.value];
+        production = fridgeProductionList[(int)productionManagement.value];
+
+        nextFridgePerHour = production;
+        nextFridgePrice = price;
+
         nextFridgePriceText.text = nextFridgePrice.ToString() + "$";
         nextFridgePerHourText.text = nextFridgePerHour.ToString() + "/h";
     }
 
     void calculateMoneyEarning()
     {
-
         deliveryCapacity = deliveryChain.GetComponent<DeliveryChain>().getDeliveryCapacity();
         if (fridgeProductionPerHour > deliveryCapacity) {
             money.GetComponent<MoneyMaking>().increaseMoneyEarning(fridgePrice * deliveryCapacity);
@@ -173,5 +282,81 @@ public class ProductionManagement : MonoBehaviour
         newAd.transform.SetParent(Canvas.transform, false);
         newAd.GetComponent<AdToaster>().setRemainingTime(adTimeBoost);
         newAd.GetComponent<AdToaster>().setAdTitle(adTitle);
+        newAd.GetComponent<AdToaster>().setToasterList(ToasterList);
+
+        ToasterList.GetComponent<ToasterList>().addToaster(newAd);
+    }
+
+    public void stopDamage()
+    {
+        productionChainDamageTime = 0;
+        isProductionChainDamaged = false;
+        StopCoroutine(coroutineStopDamage());
+    }
+
+    IEnumerator coroutineStopDamage()
+    {
+        yield return new WaitForSeconds(damageTimeDuration);
+        productionChainDamageTime = 0;
+        damageMoneyDrop = 0;
+        damageRepairCost = 0;
+        isProductionChainDamaged = false;
+    }
+
+    public int getFridgeProduction()
+    {
+        return (fridgeProductionPerHour);
+    }
+    public int getFridgePrice()
+    {
+        return (fridgePrice);
+    }
+
+    public void setOpponentFridgePrice(int price)
+    {
+        opponentFridgePrice = price;
+    }
+
+    public void setOpponentFridgeProduction(int production)
+    {
+        opponentFridgeProduction = production;
+    }
+
+    public void setProdMaintenanceBudget(int percent)
+    {
+        maintenancePercent = percent;
+    }
+    public int getMaintenancePercent()
+    {
+        return (maintenancePercent);
+    }
+
+    public void increaseMaxProduction()
+    {
+        fridgeProductionList[0] += 4;
+        fridgeProductionList[1] += 3;
+        fridgeProductionList[2] += 3;
+        fridgeProductionList[3] += 2;
+        fridgeProductionList[4] += 2;
+        fridgeProductionList[5] += 1;
+        fridgeProductionList[6] += 1;
+
+        productionManagementValueChange();
+        updateFridgeProduction();
+    }
+
+    public void increaseMaxPrice()
+    {
+        fridgePriceList[1] += 5;
+        fridgePriceList[2] += 10;
+        fridgePriceList[3] += 13;
+        fridgePriceList[4] += 25;
+        fridgePriceList[5] += 45;
+        fridgePriceList[6] += 85;
+        fridgePriceList[7] += 175;
+        fridgePriceList[8] += 350;
+
+        productionManagementValueChange();
+        updateFridgeProduction();
     }
 }

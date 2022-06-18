@@ -21,6 +21,7 @@ public class BuyNewTruck : MonoBehaviour
 
     public void buyTruck()
     {
+        nbTruck = delivery.GetComponent<DeliveryChain>().getNbOfTruck();
         int maxNbOfTruck = delivery.GetComponent<DeliveryChain>().getMaxNbOfTruck();
         if (money.GetComponent<MoneyMaking>().getMoney() > costOfUpgrade && nbTruck < maxNbOfTruck) {
             money.GetComponent<MoneyMaking>().pay(costOfUpgrade);

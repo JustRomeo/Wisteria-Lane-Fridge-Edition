@@ -10,7 +10,7 @@ public class ActiveCanvas : MonoBehaviour
     void Start()
     {
         openedCanvas = null;
-        isACanvasOpen = false;
+        isACanvasOpen = true;
     }
 
     // Update is called once per frame

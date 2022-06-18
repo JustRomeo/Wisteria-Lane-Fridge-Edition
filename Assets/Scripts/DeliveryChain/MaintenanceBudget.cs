@@ -17,7 +17,7 @@ public class MaintenanceBudget : MonoBehaviour
         // budget = 150;
         fullBudgetMaintenance = 450;
         fullBudgetMaintenanceText.text = fullBudgetMaintenance.ToString() + "$";
-        money.GetComponent<MoneyMaking>().setMaintenanceBudget(fullBudgetMaintenance);
+        money.GetComponent<MoneyMaking>().setCarMaintenanceBudget(fullBudgetMaintenance);
     }
 
     // Update is called once per frame
@@ -29,6 +29,6 @@ public class MaintenanceBudget : MonoBehaviour
     {
         fullBudgetMaintenance = fullBudget;
         fullBudgetMaintenanceText.text = fullBudgetMaintenance.ToString() + "$";
-        money.GetComponent<MoneyMaking>().setMaintenanceBudget(fullBudgetMaintenance);
+        money.GetComponent<MoneyMaking>().setCarMaintenanceBudget(fullBudgetMaintenance);
     }
 }

@@ -5654,6 +5654,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1436251551}
+  - {fileID: 640769511}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11221,6 +11222,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636497331}
   m_CullTransparentMesh: 1
+--- !u!1 &640769510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640769511}
+  - component: {fileID: 640769512}
+  m_Layer: 0
+  m_Name: WinableCondition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640769511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640769510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 236009210}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640769512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640769510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b9e4f2e30c393448a553628f275ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &650414866
 GameObject:
   m_ObjectHideFlags: 0
@@ -29436,7 +29481,10 @@ MonoBehaviour:
   enterpriseValue: 0
   moneyPerHourText: {fileID: 1218198619}
   adPrefab: {fileID: 4925280251733434716, guid: 414aaf99b94e82d46866ba573d780573, type: 3}
+  repairButtonPrefab: {fileID: 0}
   Canvas: {fileID: 893981412}
+  RepairCanvas: {fileID: 0}
+  ToasterList: {fileID: 0}
 --- !u!114 &1554130059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31321,6 +31369,7 @@ MonoBehaviour:
   warehouse: {fileID: 600884191}
   adPrefab: {fileID: 4925280251733434716, guid: 414aaf99b94e82d46866ba573d780573, type: 3}
   Canvas: {fileID: 893981412}
+  ToasterList: {fileID: 0}
 --- !u!114 &1663705871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33929,6 +33978,7 @@ MonoBehaviour:
   Button3: {fileID: 678505296}
   MoneyBoostType: {fileID: 256331475}
   SpeedBoostType: {fileID: 1697952818}
+  CreateAdButton: {fileID: 0}
   money: {fileID: 1554130057}
   productionManagement: {fileID: 1663705869}
 --- !u!224 &1819901436

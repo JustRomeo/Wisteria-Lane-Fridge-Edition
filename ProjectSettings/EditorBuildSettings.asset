@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MergeMapInUI/MergeMapInUI.unity
-    guid: 72868b674c07d5740aca506454040410
+    path: Assets/Scenes/Launcher.unity
+    guid: 1986bdff599d23b4dace224b9ffd260f
+  - enabled: 1
+    path: Assets/Scenes/InterfaceScene.unity
+    guid: ec2b9ea353e2fc143b0d16eb41628471
   - enabled: 1
     path: Assets/Scenes/Menu/EndScreen.unity
     guid: 767c64e9795ce6f4193337427764b510

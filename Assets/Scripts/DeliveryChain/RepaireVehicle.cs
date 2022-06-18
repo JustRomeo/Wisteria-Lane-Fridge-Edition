@@ -11,13 +11,12 @@ public class RepaireVehicle : MonoBehaviour
     public GameObject deliveryChain;
     public GameObject damageToaster;
 
-    private int costOfUpgrade;
+    private int costOfRepair;
 
-    public Text costOfUpgradeText;
+    public Text costOfRepairText;
     // Start is called before the first frame update
     void Start()
     {
-        costOfUpgrade = 500;
     }
 
     // Update is called once per frame
@@ -47,14 +46,19 @@ public class RepaireVehicle : MonoBehaviour
 
     public void setButtonTitle(string buttonTitle)
     {
-        costOfUpgradeText.text = buttonTitle;
+        costOfRepairText.text = buttonTitle;
+    }
+
+    public void setRepairCost(int repairCost)
+    {
+        costOfRepair = repairCost;
     }
 
     public void repairVehicle()
     {
-        if (money.GetComponent<MoneyMaking>().getMoney() > costOfUpgrade) {
-            money.GetComponent<MoneyMaking>().pay(costOfUpgrade);
-            money.GetComponent<MoneyMaking>().resetMoneyModifier(deliveryChain, damageToaster, gameObject);
+        if (money.GetComponent<MoneyMaking>().getMoney() > costOfRepair) {
+            money.GetComponent<MoneyMaking>().pay(costOfRepair);
+            money.GetComponent<MoneyMaking>().resetCarMoneyModifier(deliveryChain, damageToaster, gameObject);
             deliveryChain.GetComponent<DeliveryChain>().stopDamage();
         }
     }
