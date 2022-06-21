@@ -7,10 +7,10 @@ using Photon.Realtime;
 using UnityEngine.UI;
 
 public class EndCondition : MonoBehaviour {
-    private float gametime = 60;
+    // private float gametime = 60;
     // private float gametime = 5; // 5seconds game for demo
     // private float gametime = 1800; // around 30min for a real game
-    // private float gametime = 300; // 1min game for test and developpment
+    private float gametime = 300; // 1min game for test and developpment
 
     private float starttime = 0;
 
